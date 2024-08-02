@@ -254,7 +254,7 @@ svg text {
   stroke: white;
   font-size: 100px;
   font-weight: 1000;
-  stroke-width: 2;
+  stroke-width: 1;
   animation: textAnimate 5s infinite alternate;
   
 }
