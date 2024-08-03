@@ -291,9 +291,17 @@ svg text {
 
 /*landing mobile*/
 /* Mobile Responsive Styles */
+
+@media (min-wdith: 769px) {
+.landing-text-mobile{
+    display: none;
+  }
+}
+
+  
 @media (max-width: 767px) {
 #landing {
-  background-size: 300%;
+  background-size: 320%;
 }
 
 #landing p,
@@ -302,28 +310,15 @@ svg text {
 }
 
 
-svg text {
-  font-size: 50px;
-  letter-spacing: 8px;
+  .landing-text-mobile{
+    font-size: 50px;
+  }
+
+  .pattern{
+    display: none;
+  }
 }
 
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-#landing {
-  background-size: 170%;
-}
-
-#landing p,
-#landing h3 {
-  font-size: 20px;
-}
-
-svg text {
-  font-size: 70px;
-  letter-spacing: 0px;
-}
-}
 
 
 /* intro */
