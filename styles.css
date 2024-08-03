@@ -305,9 +305,14 @@ svg text {
   font-size: 18px;
 }
 
-svg text {
-    font-size: 50px;
-    stroke-width: 2;
+  .desktop-text {
+    display: none;
+  }
+
+  .mobile-text {
+    display: block;
+    font-size: 16px;
+    margin-top: 20px;
   }
 }
 
