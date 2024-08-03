@@ -292,11 +292,7 @@ svg text {
 /*landing mobile*/
 /* Mobile Responsive Styles */
 
-@media (min-wdith: 769px) {
-.landing-text-mobile{
-    display: none;
-  }
-}
+
 
   
 @media (max-width: 767px) {
@@ -309,13 +305,9 @@ svg text {
   font-size: 18px;
 }
 
-
-  .landing-text-mobile{
+svg text {
     font-size: 50px;
-  }
-
-  .patterns{
-    display: none;
+    stroke-width: 2;
   }
 }
 
