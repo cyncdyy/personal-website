@@ -330,10 +330,11 @@ svg text {
     padding-bottom: 100px;
   }
 
-  .mobile-text {
-    font-size: 16px;
-    text-align: center;
-  }
+  #landing p{
+font-size: 16px;
+}
+
+
 }
 
 
