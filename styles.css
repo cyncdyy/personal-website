@@ -309,14 +309,14 @@ svg text {
     display: none;
   }
   
-  .mobile-text-container {
+
+  
+  .mobile-text {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
-  .mobile-text {
-    display: block;
+  .mobile-text h1{
     font-size: 50px;
     color: white;
   }
