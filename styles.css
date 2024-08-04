@@ -319,7 +319,7 @@ svg text {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 80vh;
   }
 
   .mobile-landing h1 {
