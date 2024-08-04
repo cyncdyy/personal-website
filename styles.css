@@ -305,14 +305,20 @@ svg text {
   font-size: 18px;
 }
 
-  .desktop-text {
+  .patterns {
     display: none;
   }
-
+  
+  .mobile-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
   .mobile-text {
     display: block;
-    font-size: 16px;
-    margin-top: 20px;
+    font-size: 50px;
+    color: white;
   }
 }
 
