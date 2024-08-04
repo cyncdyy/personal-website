@@ -292,7 +292,11 @@ svg text {
 /*landing mobile*/
 /* Mobile Responsive Styles */
 
-
+@media (min-wdith: 769px) {
+.mobile-text {
+    display: none;
+  }
+}
 
   
 @media (max-width: 767px) {
