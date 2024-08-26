@@ -192,3 +192,13 @@ const state = {};
 
       return diff;
     };
+
+// download button
+window.onload = function() {
+  setTimeout(function() {
+    document.querySelectorAll('.fade-in').forEach(element => {
+      element.classList.add('show');
+    });
+  }, 500); // Adjust the delay as needed
+};
+
