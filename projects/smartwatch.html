@@ -4,7 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Showcase</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
     <style>
+
+        /* loader */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF0DB;
+  transition: opacity 0.75s, visibility 0.75s;
+  z-index: 1001;
+}
+
+.loader--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.spinner {
+  width: 50px;
+  aspect-ratio: 1;
+  color: white;
+  border: 2px solid;
+  display: grid;
+  box-sizing: border-box;
+  animation: l1 4s infinite linear;
+}
+
+.spinner::before,
+.spinner::after {
+  content: "";
+  grid-area: 1/1;
+  margin: auto;
+  width: 70.7%;
+  aspect-ratio: 1;
+  border: 1px solid;
+  box-sizing: content-box;
+  animation: inherit;
+}
+
+.spinner::after {
+  width: 50%;
+  aspect-ratio: 1;
+  border: 2px solid;
+  animation-duration: 2s;
+}
+
+@keyframes l1 {
+  100% {transform:rotate(1turn)}
+}
+
+        /* cursor */
+.cursor,
+.cursor2,
+.cursor3{
+position: fixed;
+border-radius: 50%;	
+transform: translateX(-50%) translateY(-50%);
+pointer-events: none;
+left: -100px;
+top: 50%;
+mix-blend-mode: difference;
+-webkit-transition: all 300ms linear;
+transition: all 300ms linear;
+}
+.cursor{
+background-color: #fff;
+height: 0;
+width: 0;
+z-index: 99999;
+}
+.cursor2,.cursor3{
+height: 36px;
+width: 36px;
+z-index:99998;
+-webkit-transition:all 0.3s ease-out;
+transition:all 0.3s ease-out
+}
+.cursor2.hover,
+.cursor3.hover{
+-webkit-transform:scale(2) translateX(-25%) translateY(-25%);
+transform:scale(2) translateX(-25%) translateY(-25%);
+border:none
+}
+.cursor2{
+border: 2px solid #fff;
+}
+.cursor2.hover{
+background: rgba(255,255,255,1);
+border-color: transparent;
+}
+
+@media screen and (max-width: 1200px){
+.cursor,.cursor2,.cursor3{
+  display: none
+}
+}
 
         @font-face {
         font-family: 'Logam';
@@ -202,9 +303,41 @@
         .footer a:hover {
             color: white;
         }
+
+        /* Mobile View */
+        @media (max-width: 768px) {
+            .hero-title{
+                font-size: 30px;
+            }
+
+            .hero-text{
+                width: 80%;
+            }
+
+            .content {
+                width: 80%;
+            }
+
+            .image-container {
+                width: 80%;
+            }
+
+            .article-navigation {
+                width: 90%;
+            }
+        }
+
+        
     </style>
 </head>
 <body>
+    <div class="loader">
+        <div class="spinner"></div>
+      </div>
+
+    <div class='cursor' id="cursor"></div>
+        <div class='cursor2' id="cursor2"></div>
+        <div class='cursor3' id="cursor3"></div>
 
     <!-- Navigation Bar -->
     <div class="navbar">
@@ -229,7 +362,7 @@
 
     <!-- Image Section -->
     <div class="image-container">
-        <img src="../images/innovation project.jpg" alt="Project Image">
+        <img src="../images/inno group pic.jpeg" alt="Project Image">
     </div>
 
     <!-- Additional Content or Images -->
@@ -244,7 +377,7 @@
     </div>
 
     <div class="image-container">
-        <img src="path-to-another-image.jpg" alt="Another Project Image">
+        <img src="../images/Slide1.PNG" alt="Another Project Image">
     </div>
 
     <div class="content">
@@ -260,6 +393,10 @@
         </p>
     </div>
 
+    <div class="image-container">
+        <img src="../images/Slide2.PNG" alt="Another Project Image">
+    </div>
+
     <div class="content">
         <h2>Meal Delivery Progress Bar</h2>
         <p>
@@ -268,6 +405,10 @@
         <p>
             The Meal Delivery Progress Bar feature addresses this by tracking the location of meal carts and syncing the data to each crew member’s smartwatch. This allows the crew to monitor their cart's progress and adjust their pace to align with others, ensuring a smoother and more coordinated service.
         </p>
+    </div>
+
+    <div class="image-container">
+        <img src="../images/Slide3.PNG" alt="Another Project Image">
     </div>
 
     <div class="content">
@@ -312,4 +453,5 @@
     </div>
 
 </body>
+<script src="../script.js"></script>
 </html>
