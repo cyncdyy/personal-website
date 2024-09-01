@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Showcase</title>
+    <style>
+
+        @font-face {
+        font-family: 'Logam';
+        src: url('../fonts/Logam.otf') format('opentype'); /* Specify the format explicitly */
+        font-weight: normal;
+        font-style: normal;
+        }
+
+        @font-face {
+        font-family: 'Qarkine';
+        src: url('../fonts/Qarkine.ttf') format('truetype'); /* Specify the format explicitly */
+        font-weight: normal;
+        font-style: normal;
+        }
+
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: #00000000;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 35px 80px;
+            text-decoration: none;
+            font-family: Qarkine;
+            font-size: 15px;
+        }
+
+        .navbar a:hover {            
+            color: #b59e5f;
+        }
+
+        /* Hero Image and Title Styles */
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            
+        }
+
+        .hero {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+            z-index: 0;
+        }
+
+        .hero-title {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 36px;
+            text-align: center;
+            width: 100%;
+            font-family: Qarkine;
+        }
+
+        .hero-text{
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            width: 100%;
+            font-family: Logam;
+        }
+
+        /* Content Section Styles */
+        .content {
+            width: 50%;
+            margin: 0 auto;
+            
+            padding: 20px;
+            padding-top: 80px; /* Add padding to account for fixed navbar */
+        }
+
+        .content h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-family: Qarkine;
+            text-align: center;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-family: Logam;
+            text-align: center;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            text-align: justify;
+        }
+
+        /* Image Container Styles */
+        .image-container {
+            width: 50%;
+            margin: 20px auto;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Navigation Arrows Styles */
+        .article-navigation {
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+            margin: 40px auto;
+            padding: 10px 0;
+        }
+
+        .article-navigation a {
+            text-decoration: none;
+            color: white;
+            background-color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .article-navigation a:hover {
+            background-color: #555;
+        }
+
+        .article-navigation .prev-arrow::before {
+            content: "< ";
+            margin-right: 5px;
+        }
+
+        .article-navigation .next-arrow::after {
+            content: " >";
+            margin-left: 5px;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #000000;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-family: Logam;
+        }
+
+        .footer a {
+            color: #ddd;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="../index.html">CYNTHIA</a>
+    </div>
+
+    <!-- Hero Section with Title -->
+    <div class="hero-container">
+        <img src="../images/innovation project hero.jpeg" alt="Hero Image" class="hero">
+        <div class="hero-title">Flight Attendant Smartwatch</div>
+        <div class="hero-text">Internship Project | Cathay Pacific<br>
+            Teammates: Chelsy Lo, Cynthia Wai, Valerie Chan, Lovera Lokeswara</div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h2>Airlevate - Enhance Crew Efficiency in Premium Flight</h2>
+        <p>
+            During my internship at Cathay Pacific, my team and I had the opportunity to contribute to the Inflight Customer Service Delivery (ISD). Tasked with brainstorming innovative solutions to improve crew operations, we developed Airlevate—a smartwatch solution designed to provide crew members with timely, essential information to streamline their tasks and enhance overall efficiency.
+        </p>
+    </div>
+
+    <!-- Image Section -->
+    <div class="image-container">
+        <img src="../images/innovation project.jpg" alt="Project Image">
+    </div>
+
+    <!-- Additional Content or Images -->
+    <div class="content">
+        
+        <p>
+            To understand the challenges faced by cabin crew, we conducted interviews with several former crew members, including Ronald and James, who provided valuable insights. Their feedback revealed three primary pain points: inefficient communication, unnecessary double trips during service delivery, and the cumbersome process of manual scheduling.
+        </p>
+        <p>
+            Our solution, Airlevate, revolves around a smartwatch that equips each crew member with real-time access to crucial information during flights. This device offers two main features: Automated Scheduling and Meal Delivery Tracking.
+        </p>
+    </div>
+
+    <div class="image-container">
+        <img src="path-to-another-image.jpg" alt="Another Project Image">
+    </div>
+
+    <div class="content">
+        <h2>Automated Scheduling</h2>
+        <p>
+            Currently, pursers (crew managers) must manually adjust in-flight schedules—such as meal deliveries and rest periods—whenever there’s a delay or turbulence. This process is time-consuming and prone to errors, as updates must be communicated verbally, increasing the risk of miscommunication.
+        </p>
+        <p>
+            With Airlevate, pursers can simply input disruptions into their iPads, and the system will automatically recalibrate the schedule according to established guidelines. This updated schedule is then instantly synced to each crew member's smartwatch, ensuring everyone is on the same page and significantly reducing the possibility of human error.
+        </p>
+        <p>
+            For instance, in the event of turbulence requiring a halt in meal service, the purser needs only to input the information, and the revised schedule is immediately sent to all crew members via the in-flight intranet.
+        </p>
+    </div>
+
+    <div class="content">
+        <h2>Meal Delivery Progress Bar</h2>
+        <p>
+            Meal delivery on flights can often appear chaotic, with meals running out and passengers growing impatient. Our interviews highlighted the need for crews to maintain consistent meal delivery speeds across different cabins to avoid any perception of unfair treatment.
+        </p>
+        <p>
+            The Meal Delivery Progress Bar feature addresses this by tracking the location of meal carts and syncing the data to each crew member’s smartwatch. This allows the crew to monitor their cart's progress and adjust their pace to align with others, ensuring a smoother and more coordinated service.
+        </p>
+    </div>
+
+    <div class="content">
+        <h2>Meal Tracking</h2>
+        <p>
+            Another challenge identified was the difficulty in managing meal inventory during flights. Pursers are responsible for refilling meal carts but often lack real-time information on which carts require specific meal types. Currently, they rely on verbal communication with crew members who are too busy to check meal quantities during service.
+        </p>
+        <p>
+            To solve this, we introduced a Meal Inventory App integrated with the purser’s iPad. By installing RFID scanners on carts and in galleys (the flight’s pantry), pursers can instantly see which carts need which meals. For example, if cart L1 is running low on chicken meals, the purser can quickly allocate more chicken to L1 instead of R1, optimizing the meal delivery process.
+        </p>
+    </div>
+
+    <div class="content">
+        <h2>Implementation Plan</h2>
+        <p>
+            Phase One of Airlevate’s rollout will focus on ultra-long-haul flights, such as the HKG-NYC route, where the benefits of automated scheduling are most pronounced. In line with sustainability goals, we will initially use disposable RFID tags on meal boxes to test the solution’s effectiveness. In Phase Two, we plan to transition to reusable meal boxes and RFID tags.
+        </p>
+        <p>
+            If successful, Airlevate could pave the way for further innovations, such as a Crew Health App and a Crew Communication App, further enhancing the in-flight experience for both crew and passengers.
+        </p>
+    </div>
+
+
+
+    <!-- Navigation Arrows for Previous and Next Articles -->
+    <div class="article-navigation">
+        <a href="path-to-previous-article.html" class="prev-arrow">Previous Article</a>
+        <a href="path-to-next-article.html" class="next-arrow">Next Article</a>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2024 Cynthia Wai</p>
+        <p>Make it Happen.</p>
+
+        <p>
+            Let's Connect On:
+            <a href="https://twitter.com" target="_blank">LinkedIn</a> |
+            <a href="https://facebook.com" target="_blank">Github</a> |
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </p>
+    </div>
+
+</body>
+</html>
