@@ -322,7 +322,7 @@ svg text {
   }
 
   .mobile-landing h1 {
-    font-size: 48px;
+    font-size: 45px;
     text-align: center;
     color: white;
     font-family: Qarkine;
@@ -332,11 +332,11 @@ svg text {
 
   #landing p{
     font-size: 16px;
-    padding-bottom: 150px;
     }
 
     #landing h3{
       font-size: 16px;
+      padding-bottom: 100px;
     }
 }
 
