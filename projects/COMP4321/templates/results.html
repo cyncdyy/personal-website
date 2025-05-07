@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Engine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f8fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            max-width: 1200px;
+            margin: 40px auto;
+            gap: 32px;
+            min-height: 80vh;
+        }
+        .left-panel {
+            flex: 2 1 0;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 32px 32px 32px 32px;
+            min-width: 0;
+        }
+        .right-panel {
+            flex: 1 1 300px;
+            background: #f1f3f6;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 24px 20px;
+            min-width: 250px;
+            max-width: 350px;
+            height: fit-content;
+        }
+        .search-form {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 36px;
+        }
+        .search-form input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            font-size: 1.1em;
+            border-radius: 6px;
+            border: 1px solid #bbb;
+        }
+        .search-form button {
+            padding: 12px 20px;
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .search-form button:hover {
+            background: #1565c0;
+        }
+        .results-list {
+            margin-top: 12px;
+        }
+        .result-item {
+            background: #f8fafc;
+            border-radius: 7px;
+            border: 1px solid #e3e7ee;
+            margin-bottom: 22px;
+            padding: 18px 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+        .result-item h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.15em;
+        }
+        .metadata {
+            color: #7a7a7a;
+            font-size: 0.97em;
+            margin-bottom: 7px;
+        }
+        .keywords {
+            margin-top: 8px;
+        }
+        .keyword {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 2px 8px;
+            margin: 2px 4px 2px 0;
+            border-radius: 4px;
+            font-size: 0.93em;
+        }
+        .similar-form {
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .similar-form button {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffe0b2;
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .similar-form button:hover {
+            background: #ffe0b2;
+        }
+        /* Right panel (history) */
+        .history-title {
+            font-size: 1.18em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #1976d2;
+        }
+        .history-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 16px 0;
+        }
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 0;
+            border-bottom: 1px solid #e3e7ee;
+        }
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        .history-item a {
+            color: #1976d2;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .history-item .time {
+            color: #888;
+            font-size: 0.91em;
+            margin-left: auto;
+        }
+        .merge-btn {
+            margin-top: 10px;
+            padding: 6px 15px;
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .merge-btn:hover {
+            background: #1565c0;
+        }
+        .search-within {
+            margin-left: 6px;
+            font-size: 1.1em;
+            color: #ef6c00;
+        }
+        .popular-keywords {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .keyword-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .keyword-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .keyword-link {
+            color: #1976d2;
+            text-decoration: none;
+        }
+        .keyword-link:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                gap: 0;
+            }
+            .right-panel {
+                margin-top: 32px;
+                max-width: 100%;
+                width: 100%;
+            }
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Left: Search and Results -->
+    <div class="left-panel">
+        <!-- Search Box -->
+        <form class="search-form" method="GET" action="/">
+            <input type="text" name="query" placeholder="Enter your search query..." value="{{ query or '' }}">
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Results -->
+        <div class="results-list">
+            {% if results %}
+                {% for result in results %}
+                <div class="result-item">
+                    <h3><a href="{{ result.url }}" target="_blank" rel="noopener">{{ result.title }}</a></h3>
+                    <div class="metadata">
+                        <span>Score: {{ result.score }}</span> &nbsp;|&nbsp;
+                        <span>{{ result.size }}</span> &nbsp;|&nbsp;
+                        <span>{{ result.date|datetimeformat }}</span>
+                        <form class="similar-form" method="GET" action="/">
+                            <input type="hidden" name="similar_to" value="{{ result.url }}">
+                            <button type="submit">Find Similar Pages</button>
+                        </form>
+                    </div>
+                    <div class="keywords">
+                        {% for keyword in result.keywords %}
+                        <span class="keyword">{{ keyword }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No results found. Try another search!</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Right: Search History -->
+    <div class="right-panel">
+        <div class="history-title">Search History</div>
+        <form method="POST" action="/clear-history">
+            <ul class="history-list">
+                {% for entry in query_history %}
+                <li class="history-item">
+                    <a href="/?query={{ entry.query|urlencode }}">{{ entry.query }}</a>
+                    <a class="search-within" title="Search within these results" href="/?search_within={{ loop.index0 }}">🔍</a>
+                    <span class="time">{{ entry.time|datetimeformat }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" class="merge-btn" style="background: #b71c1c;">Clear History</button>
+        </form>
+        <!-- Popular keywords section -->
+        <div class="popular-keywords" style="margin-top: 30px;">
+            <div class="history-title">Popular Stemmed Keywords</div>
+            <ul class="keyword-list">
+                {% for term, freq in popular_keywords %}
+                <li class="keyword-item">
+                    <a href="/?query={{ term }}" class="keyword-stem">{{ term }}</a>
+                    ({{ "%.1f"|format(freq) }})
+                </li>
+                {% endfor %}
+            </ul>
+        </div>        
+    </div>
+    </div>
+</div>
+</body>
+</html>
