@@ -328,6 +328,7 @@ svg text {
     font-family: Qarkine;
     margin-bottom: 150px;
     line-height: 2;
+    z-index: 9999;
   }
 
   #landing p{
@@ -935,7 +936,7 @@ height: 200px;
 z-index: 0;
 object-fit: cover;
 left: 600px;
-padding-top: 600px;
+padding-top: 400px;
 }
 
 /*quote mobile*/
