@@ -1,286 +1,1059 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cynthia Wai</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="images/logo.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cynthia Wai — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:     #050D1A;
+    --navy-mid: #0A1628;
+    --navy-card:#0D1F38;
+    --cyan:     #00E5C3;
+    --cyan-dim: #00B89A;
+    --gold:     #F0B429;
+    --text:     #E8EEF7;
+    --text-muted:#7A8FA8;
+    --text-dim: #3D5068;
+    --border:   rgba(0,229,195,0.15);
+    --border-dim:rgba(255,255,255,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 2.5rem;
+    background: rgba(5,13,26,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border-dim);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 20px;
+    color: var(--cyan); letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-cta {
+    background: transparent;
+    border: 0.5px solid var(--cyan);
+    color: var(--cyan);
+    padding: 0.5rem 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none; white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--cyan); color: var(--navy); }
+
+  /* hamburger */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 4px; background: none; border: none;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--text); transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--navy); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 2.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--text); text-decoration: none;
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; letter-spacing: -1px;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--cyan); }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    background: var(--cyan); color: var(--navy);
+    padding: 0.8rem 2rem; font-family: 'DM Mono', monospace;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; cursor: pointer; text-decoration: none;
+    display: inline-block; transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost {
+    background: transparent; color: var(--text);
+    padding: 0.8rem 2rem; font-family: 'DM Mono', monospace;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 0.5px solid var(--border-dim); cursor: pointer;
+    text-decoration: none; display: inline-block; transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* ── LAYOUT ── */
+  section { padding: 6rem 2.5rem; }
+  .divider { width: 100%; height: 0.5px; background: var(--border-dim); }
+
+  .section-header { margin-bottom: 4rem; }
+  .section-label {
+    display: block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 4.5vw, 56px);
+    line-height: 1.05; letter-spacing: -1px; color: var(--text);
+  }
+  .section-title em { font-style: italic; color: var(--cyan); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2.5rem;
+    align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(0,229,195,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid-lines {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(0,229,195,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,195,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-left { position: relative; z-index: 2; padding-top: 6rem; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--cyan); border: 0.5px solid var(--border);
+    padding: 0.35rem 0.85rem; margin-bottom: 2rem;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(52px, 7vw, 96px);
+    line-height: 0.95; letter-spacing: -2px; color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .hero-name em { font-style: italic; color: var(--cyan); }
+  .hero-role {
+    font-size: 13px; color: var(--gold); margin-bottom: 1rem; font-weight: 400;
+  }
+  .hero-subtitle {
+    color: var(--text-muted); font-size: 13px; letter-spacing: 0.03em;
+    margin-bottom: 2.5rem; line-height: 1.9;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .hero-right {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: flex-end;
+    padding-top: 6rem;
+  }
+  .hero-stat-block {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    width: 100%; max-width: 360px;
+  }
+  .stat-card {
+    background: var(--navy-card); border: 0.5px solid var(--border-dim);
+    padding: 1.25rem; position: relative; overflow: hidden;
+  }
+  .stat-card::after {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 2px; height: 100%; background: var(--cyan);
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px; font-weight: 800; color: var(--cyan);
+    line-height: 1; margin-bottom: 0.35rem;
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; }
+  .hero-scroll {
+    margin-top: 3rem; display: flex; align-items: center; gap: 0.75rem;
+    color: var(--text-dim); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .scroll-line { width: 40px; height: 0.5px; background: var(--text-dim); }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .about-text { color: var(--text-muted); font-size: 15px; line-height: 1.9; }
+  .about-text p { margin-bottom: 1.25rem; }
+  .about-text strong { color: var(--text); font-weight: 500; }
+  .services-list { display: flex; flex-direction: column; gap: 1rem; }
+  .service-item {
+    background: var(--navy-card); border: 0.5px solid var(--border-dim);
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .service-item:hover { border-color: var(--cyan); }
+  .service-icon { font-size: 14px; color: var(--cyan); flex-shrink: 0; margin-top: 2px; }
+  .service-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 0.25rem; }
+  .service-desc { font-size: 12px; color: var(--text-muted); }
+
+  /* ── EXPERIENCE TIMELINE ── */
+  .experience { background: var(--navy-mid); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 0.5px; background: var(--border);
+  }
+  .timeline-item { position: relative; padding: 0 0 3rem 2rem; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -4.5px; top: 6px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 0 3px var(--navy-mid), 0 0 0 4.5px var(--cyan);
+  }
+  .timeline-date { font-size: 11px; color: var(--cyan); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.35rem; }
+  .timeline-role { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+  .timeline-company { font-size: 13px; color: var(--gold); margin-bottom: 0.75rem; }
+  .timeline-desc { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+  .timeline-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
+  .tag {
+    font-size: 11px; letter-spacing: 0.06em;
+    border: 0.5px solid var(--border); color: var(--text-muted);
+    padding: 0.25rem 0.6rem;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
+  }
+  .skill-group-name {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 1rem;
+    padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--border);
+  }
+  .skill-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.5rem 0; border-bottom: 0.5px solid var(--border-dim);
+    font-size: 13px; color: var(--text-muted);
+  }
+  .skill-bar-track { width: 60px; height: 2px; background: rgba(255,255,255,0.08); position: relative; }
+  .skill-bar-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--cyan); }
+
+  /* ── PROJECTS (ACCORDION) ── */
+  .projects-list { display: flex; flex-direction: column; gap: 0; }
+
+  .project-accordion {
+    border-bottom: 0.5px solid var(--border-dim);
+    overflow: hidden;
+  }
+  .project-accordion:first-child { border-top: 0.5px solid var(--border-dim); }
+
+  .project-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.75rem 0;
+    cursor: pointer;
+    gap: 1.5rem;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .project-header:hover .project-header-title { color: var(--cyan); }
+
+  .project-header-left {
+    display: flex; align-items: center; gap: 1.5rem; flex: 1; min-width: 0;
+  }
+  .project-header-num {
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    color: var(--text-dim); letter-spacing: 0.08em; flex-shrink: 0;
+  }
+  .project-header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: var(--text); letter-spacing: -0.5px;
+    transition: color 0.2s; line-height: 1.2;
+  }
+  .project-header-tags {
+    display: flex; gap: 0.5rem; flex-wrap: wrap; flex-shrink: 0;
+  }
+  .project-tag {
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    background: rgba(0,229,195,0.08); color: var(--cyan);
+    padding: 0.2rem 0.6rem; white-space: nowrap;
+  }
+  .project-toggle-icon {
+    flex-shrink: 0; width: 28px; height: 28px;
+    border: 0.5px solid var(--border-dim);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s; color: var(--text-muted); font-size: 16px;
+    font-family: 'DM Mono', monospace; line-height: 1;
+  }
+  .project-accordion.open .project-toggle-icon {
+    border-color: var(--cyan); color: var(--cyan); transform: rotate(45deg);
+  }
+
+  .project-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+    padding: 0 0;
+  }
+  .project-accordion.open .project-body {
+    max-height: 600px;
+  }
+  .project-body-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    padding: 0 0 2.5rem 0;
+    align-items: start;
+  }
+  .project-body-content { }
+  .project-body-desc {
+    font-size: 14px; color: var(--text-muted); line-height: 1.9;
+    margin-bottom: 1.25rem;
+  }
+  .project-body-meta { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .project-meta-row {
+    display: flex; gap: 0.75rem; font-size: 12px;
+  }
+  .project-meta-label { color: var(--text-dim); width: 70px; flex-shrink: 0; }
+  .project-meta-value { color: var(--text-muted); }
+  .project-link {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--cyan); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 0.5px solid var(--border);
+    padding: 0.6rem 1.25rem;
+    transition: all 0.2s;
+  }
+  .project-link:hover { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
+  .project-body-visual {
+    background: var(--navy-card); border: 0.5px solid var(--border-dim);
+    min-height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .project-body-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0,229,195,0.06) 0%, transparent 70%);
+  }
+  .project-visual-label {
+    font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800;
+    color: rgba(0,229,195,0.08); letter-spacing: -2px; position: relative; z-index: 1;
+  }
+
+  /* ── CONSULTING ── */
+  .consulting { background: var(--navy-mid); }
+  .consulting-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border-dim);
+  }
+  .consulting-item {
+    background: var(--navy-mid); padding: 2.5rem 2rem;
+    transition: background 0.25s;
+  }
+  .consulting-item:hover { background: var(--navy-card); }
+  .consulting-num { font-family: 'Syne', sans-serif; font-size: 13px; color: var(--cyan); letter-spacing: 0.12em; margin-bottom: 1rem; }
+  .consulting-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--text); margin-bottom: 0.75rem; }
+  .consulting-desc { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  /* ── CONTACT ── */
+  .contact-section { }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .contact-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(38px, 5vw, 72px);
+    line-height: 1.0; letter-spacing: -2px; color: var(--text); margin-bottom: 1.5rem;
+  }
+  .contact-title em { font-style: italic; color: var(--cyan); }
+  .contact-sub { color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 1.5rem;
+    background: var(--navy-card); border: 0.5px solid var(--border-dim);
+    text-decoration: none; transition: border-color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--cyan); }
+  .contact-link-name { font-size: 13px; color: var(--text); letter-spacing: 0.04em; margin-bottom: 2px; }
+  .contact-link-handle { font-size: 12px; color: var(--text-muted); }
+  .contact-link-arrow { color: var(--cyan); font-size: 18px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 0.5px solid var(--border-dim);
+    padding: 2rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--text-dim);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.1rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    section { padding: 5rem 1.5rem; }
+
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 0 1.5rem;
+      min-height: auto;
+      padding-top: 5rem;
+      padding-bottom: 4rem;
+      gap: 3rem;
+    }
+    .hero-left { padding-top: 4rem; }
+    .hero-right { align-items: flex-start; padding-top: 0; }
+    .hero-stat-block { max-width: 100%; }
+    .hero-scroll { display: none; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    .skills-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+    .project-body-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+    .project-header-tags { display: none; }
+
+    .consulting-grid { grid-template-columns: 1fr 1fr; }
+
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  @media (max-width: 560px) {
+    nav { padding: 1rem 1.25rem; }
+    section { padding: 4rem 1.25rem; }
+
+    .hero { padding: 0 1.25rem; padding-top: 4rem; padding-bottom: 3rem; }
+    .hero-name { font-size: 52px; }
+    .hero-stat-block { grid-template-columns: 1fr 1fr; }
+    .hero-ctas { flex-direction: column; }
+    .hero-ctas a { text-align: center; }
+
+    .skills-grid { grid-template-columns: 1fr; }
+
+    .consulting-grid { grid-template-columns: 1fr; }
+
+    .project-header { padding: 1.25rem 0; }
+    .project-header-num { display: none; }
+
+    footer { padding: 1.5rem 1.25rem; }
+  }
+</style>
 </head>
-    <body>
-        <div class="loader">
-            <div class="spinner"></div>
-          </div>
+<body>
 
-        <!-- <div class="navbar">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-        </div> -->
+<!-- ── NAV ── -->
+<nav>
+  <a href="#home" class="nav-logo">CW.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#consulting">Consulting</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:cyncdyy@gmail.com" class="nav-cta">Get in Touch</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-        <div class='cursor' id="cursor"></div>
-        <div class='cursor2' id="cursor2"></div>
-        <div class='cursor3' id="cursor3"></div>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mobile-nav-link">About</a>
+  <a href="#experience" class="mobile-nav-link">Experience</a>
+  <a href="#projects" class="mobile-nav-link">Projects</a>
+  <a href="#consulting" class="mobile-nav-link">Consulting</a>
+  <a href="#contact" class="mobile-nav-link">Contact</a>
+</div>
 
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-grid-lines"></div>
+  <div class="hero-left">
+    <div class="hero-tag">// Analyst · Builder · Strategist</div>
+    <h1 class="hero-name">Cynthia<br><em>Wai</em></h1>
+    <p class="hero-role">Graduate Analyst @ BNP Paribas &nbsp;·&nbsp; HKUST Information Systems</p>
+    <p class="hero-subtitle">
+      Bridging technology and strategy —<br>
+      turning data into decisions and ideas into products.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Work</a>
+      <a href="#consulting" class="btn-ghost">What I Offer</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-block">
+      <div class="stat-card">
+        <div class="stat-num">4+</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Domains</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">IS</div>
+        <div class="stat-label">HKUST Major</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">HK</div>
+        <div class="stat-label">Based In</div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll to explore
+    </div>
+  </div>
+</section>
 
+<div class="divider"></div>
 
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-label">// 01 — About</span>
+    <h2 class="section-title">Tech mind,<br><em>consulting soul.</em></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm Cynthia — a <strong>Graduate Analyst at BNP Paribas</strong> with a background in Information Systems from HKUST, minoring in Mathematics and Big Data.</p>
+      <p>I sit at the intersection of <strong>technology and business strategy</strong>. Whether it's building data pipelines, designing intuitive UX, or researching emerging tech like Web3 — I bring analytical rigor and creative thinking to every challenge.</p>
+      <p>I believe the best solutions come from understanding both the system architecture <em>and</em> the human at the end of it.</p>
+    </div>
+    <div class="services-list">
+      <div class="service-item">
+        <div class="service-icon">◈</div>
+        <div>
+          <div class="service-name">Data Analytics & Intelligence</div>
+          <div class="service-desc">Sentiment analysis, dashboards, mining insights from complex datasets.</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">◈</div>
+        <div>
+          <div class="service-name">Product & UX Design</div>
+          <div class="service-desc">Human-centered design, prototyping, and UI/UX for digital products.</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">◈</div>
+        <div>
+          <div class="service-name">Automation & Systems</div>
+          <div class="service-desc">Process automation, database design, workflow optimization.</div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">◈</div>
+        <div>
+          <div class="service-name">Web3 & Emerging Tech</div>
+          <div class="service-desc">NFTs, smart contracts, crypto market research and strategy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-          <div class="scroll-section" id="landing">
-            <div class="patterns">
-              <svg width="100%" height="100%">
-                <defs>
-                  <pattern id="polka-dots" x="0" y="0" width="100" height="100"
-                           patternUnits="userSpaceOnUse">
-                    <circle fill="#be9ddf" cx="25" cy="25" r="3"></circle>
-                  </pattern>  
-                </defs>
-                          
-             <text x="50%" y="60%"  text-anchor="middle" class="desktop-text">
-               Make it 
-             </text>
-             <text x="50%" y="85%"  text-anchor="middle" class="desktop-text">
-              Happen
-            </text>
-             </svg>
-             
-            </div>
-            <div class="mobile-landing">
-              <h1>Make it Happen</h1>
-            </div>
-            <p>Dreamer | Based in Hong Kong</p>
-            <h3>Explore ▼</h3>
-            
-          </div>
+<div class="divider"></div>
 
+<!-- ── EXPERIENCE ── -->
+<section id="experience" class="experience">
+  <div class="section-header">
+    <span class="section-label">// 02 — Experience</span>
+    <h2 class="section-title">Where I've<br><em>worked & learned.</em></h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">Upcoming 2026</div>
+      <div class="timeline-role">MCs Computer Science</div>
+      <div class="timeline-company">Georgia Institute of Technology, Remote</div>
+      <div class="timeline-desc"></div>
+      <div class="timeline-tags">
+        <span class="tag">Software Development</span>
+        <span class="tag">Data Analytics and Security</span>
+        <span class="tag">Time Series Analysis</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2025 — Present</div>
+      <div class="timeline-role">Graduate Analyst</div>
+      <div class="timeline-company">BNP Paribas, Hong Kong</div>
+      <div class="timeline-desc">Working across technology and operations at one of Europe's leading banking groups, applying data and systems knowledge to real-world financial challenges.</div>
+      <div class="timeline-tags">
+        <span class="tag">Finance Tech</span>
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Project Portfolio Management</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2024</div>
+      <div class="timeline-role">Digital & IT Intern</div>
+      <div class="timeline-company">Cathay Pacific, Hong Kong</div>
+      <div class="timeline-desc">Working across technology and operations at one of Europe's leading banking groups, applying data and systems knowledge to real-world financial challenges.</div>
+      <div class="timeline-tags">
+        <span class="tag">Hackathon</span>
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Process Transformation</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2021 — 2025</div>
+      <div class="timeline-role">BBA Information Systems</div>
+      <div class="timeline-company">HKUST — Minor in Math & Big Data</div>
+      <div class="timeline-desc">Built expertise across databases, frontend development, data mining, UX design, and emerging technologies. Graduated with a broad technical and business foundation.</div>
+      <div class="timeline-tags">
+        <span class="tag">Information Systems</span>
+        <span class="tag">Big Data</span>
+        <span class="tag">Mathematics</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-          <div class="scroll-section" id="intro">
-            <div class="intro-desktop-wrapper">
-              <div class="intro-content fade-in">
-                <div class="text">
-                  <h2>Hey there, this is </h2>
-                  <h1>Cynthia</h1>
-                </div>
-                <div class="ppf fade-in">
-                  <img src="images/profilepic.jpeg" alt="Profile Pic">
-                </div>
+<div class="divider"></div>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-label">// 03 — Skills & Tools</span>
+    <h2 class="section-title">The <em>stack</em><br>I work with.</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-name">Data & Analytics</div>
+      <div class="skill-item"><span>Python</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      <div class="skill-item"><span>SQL / Databases</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+      <div class="skill-item"><span>Data Mining</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+      <div class="skill-item"><span>Dashboards</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">Development</div>
+      <div class="skill-item"><span>HTML / CSS / JS</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div></div>
+      <div class="skill-item"><span>Automation</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:72%"></div></div></div>
+      <div class="skill-item"><span>Database Design</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+      <div class="skill-item"><span>Web3 / Solidity</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:55%"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">Strategy & Design</div>
+      <div class="skill-item"><span>UX / UI Design</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+      <div class="skill-item"><span>Project Management</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+      <div class="skill-item"><span>Business Analysis</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div></div>
+      <div class="skill-item"><span>Research</span><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── PROJECTS (ACCORDION) ── -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-label">// 04 — Featured Work</span>
+    <h2 class="section-title">Projects that<br><em>made an impact.</em></h2>
+  </div>
+
+  <div class="projects-list">
+    <!-- Project 1 -->
+    <div class="project-accordion" id="proj-1">
+      <div class="project-header" onclick="toggleProject('proj-1')">
+        <div class="project-header-left">
+          <span class="project-header-num">01</span>
+          <span class="project-header-title">CaseIT 2025</span>
+        </div>
+        <div class="project-header-tags">
+          <span class="project-tag">Digital Transformation</span>
+          <span class="project-tag">Case Competition</span>
+          <span class="project-tag">Python</span>
+        </div>
+        <div class="project-toggle-icon">+</div>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="project-body-content">
+            <p class="project-body-desc">Competed in 5-hour and 24-hour case formats addressing IT transformation challenges for Canadian education and transportation enterprises, proposing solutions leveraging IoT, Digital Twin, AI, and gamification to drive user adoption and operational efficiency.</p>
+            <div class="project-body-meta">
+              <div class="project-meta-row">
+                <span class="project-meta-label">Type</span>
+                <span class="project-meta-value">IT Strategy & Digital Transformation</span>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Tools</span>
+                <span class="project-meta-value">IoT, Digital Twin technology, AI frameworks</span>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Output</span>
+                <span class="project-meta-value">End-to-end situation analysis, prototype mockups, and comprehensive phased implementation roadmaps</span>
               </div>
             </div>
-            <div class="intro-mobile-wrapper">
-              <div class="intro-content-mobile fade-in">
-                <div class="text-mobile">
-                  <h2>Hey there, this is </h2>
-                </div>
-                <div class="ppf-mobile fade-in">
-                  <img src="images/profilepic.jpeg" alt="Profile Pic">
-                </div>
-                <div class="text-mobile">
-                  <h1>Cynthia</h1>
-                </div>
-              </div>
-            </div>
           </div>
+          <div class="project-body-visual">
+            <div class="project-visual-label">Digital Transformation</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
-            <div class="scroll-section" id="tag">
-              <!-- <a href="" class="typewrite fade-in" data-period="2000" data-type='["Final year in HKUST", "Major in Information Systems", "Minor in Math and Big Data" ]'>
-                  <span class="wrap"></span>
-                </a> -->
-                <div class="bio fade-in"><p>I am a dreamer who dares to make it happen.</p></div>
-                <div class="text-holder fade-in">
-                  <div class="text">
-                    <p>Graduate Analyst at BNP Paribas<br>
-                      HKUST | Information Systems <br>
-                      Minor in Math and Big Data</p>
+        <!-- Project 2 -->
+        <div class="project-accordion" id="proj-2">
+          <div class="project-header" onclick="toggleProject('proj-2')">
+            <div class="project-header-left">
+              <span class="project-header-num">02</span>
+              <span class="project-header-title">Oliver Wyman Case Competition 2025</span>
+            </div>
+            <div class="project-header-tags">
+              <span class="project-tag">Market Entry & Growth</span>
+              <span class="project-tag">Case Competition</span>
+            </div>
+            <div class="project-toggle-icon">+</div>
+          </div>
+          <div class="project-body">
+            <div class="project-body-inner">
+              <div class="project-body-content">
+                <p class="project-body-desc">Conducted a strategic feasibility study for Rent the Runway to evaluate a market entry into Hong Kong. The project involved deep-diving into local market dynamics and competitive positioning to determine the viability of the fashion-rental model in a new geography.</p>
+                <div class="project-body-meta">
+                  <div class="project-meta-row">
+                    <span class="project-meta-label">Type</span>
+                    <span class="project-meta-value">Strategic Market Analysis</span>
+                  </div>
+                  <div class="project-meta-row">
+                    <span class="project-meta-label">Tools</span>
+                    <span class="project-meta-value">Competitor Benchmarking, Segmentation, SWOT</span>
+                  </div>
+                  <div class="project-meta-row">
+                    <span class="project-meta-label">Output</span>
+                    <span class="project-meta-value">Comprehensive market analysis and formal pitch presentation.</span>
                   </div>
                 </div>
-                
-            
-            <h2 class="fade-in">interested area</h2>
-          <div class="tag-section-container fade-in">
-            <div class="tag-container">
-              <span>Project Management</span>
-            </div>
-            <div class="tag-container">
-              <span>Database Management</span>
-            </div>
-            <div class="tag-container">
-              <span>Data Analytics</span>
-            </div>
-            <div class="tag-container">
-              <span>Automation</span>
-            </div>
-            <div class="tag-container">
-              <span>Frontend Development</span>
-            </div>
-            <div class="tag-container">
-              <span>Web 3</span>
-            </div>
-            <div class="tag-container">
-              <span>Cryptocurrency</span>
-            </div>
-            <div class="tag-container">
-              <span>UI/UX Design</span>
-            </div>
-          </div>
-          <!-- <h3 class="fade-in">Scroll down to see my projects ↓↓</h3> -->
-        </div>
-
-
-
-
-        <div class="scroll-section" id="project">
-          <div class="featured-work fade-in">
-            <h1>Featured<br>Work</h1>
-            <ul>
-              <li>data mining</li>
-              <li>coding</li>
-              <li>business idea</li>
-              <li>research</li>
-            </ul>
-          </div>
-          <div class="image-grid">
-            <div class="image-container right">
-              <img src="images/white.jpeg">
-            </div>
-            <div class="image-container left fade-in">
-              <h2 class="right-text fade-in">Airline Tweet Sentiment Analysis</h2>
-            </div>
-            <div class="image-container right">
-              <h2 class="left-text fade-in">Search Engine Project</h2>
-            </div>
-            <div class="image-container left fade-in">
-              <img src="images/airline-sentiment.jpeg" alt="">
-              <a href="doc/IE500_Data_mining.pdf" download="airline-sentiment-report.pdf" class="download-button">Download Report</a>
-            </div>
-            <div class="image-container right fade-in">
-              <img src="images/dashboard.jpeg" alt="">
-              <a href="https://youtu.be/Hqz17dhkRJs" class="download-button">Explore</a>
-            </div>
-            <div class="image-container left">
-              <h2 class="right-text fade-in">Flight Attendant Smart Watch</h2>
-            </div>
-            <div class="image-container right">
-              <h2 class="left-text fade-in">NFT Research Paper</h2>
-            </div>
-            <div class="image-container left fade-in">
-              <img src="images/smart-watch.jpeg" alt="">
-              <a href="projects/smartwatch.html" class="download-button">Explore</a>
-            </div>
-            <div class="image-container right fade-in">
-              <img src="images/smart-contract.jpeg" alt="">
-              <a href="https://www.linkedin.com/feed/update/urn:li:activity:7048220691581599744/" class="download-button">Explore</a>
-            </div>
-            <div class="image-container left">
-            </div>
-            <div class="image-container right">
-              <img src="images/white.jpeg">
-            </div>
-            <div class="image-container left fade-in"></div>
-          </div>
-
-          <div class="featured-work-mobile-wrapper">
-            <div class="featured-work-mobile fade-in">
-              <h1 style="font-size: 25px;">Featured Work</h1>
-              <ul>
-                <li>data mining</li>
-                <li>coding</li>
-                <li>business idea</li>
-                <li>research</li>
-              </ul>
-            </div>
-            <div class="image-grid-mobile fade-in">
-                <h2 class="fade-in">Airline Tweet Sentiment Analysis</h2>
-                <a href="doc/IE500_Data_mining.pdf" >
-                  <img src="images/airline-sentiment.jpeg" alt="Airline Sentiment">
-                </a>
-                <h2 class="fade-in">Search Engine Project</h2>
-                <a href="https://youtu.be/Hqz17dhkRJs" >
-                  <img src="images/dashboard.jpeg" alt="Search Engine">
-                </a>
-                <h2 class="fade-in">Flight Attendant Smart Watch</h2>
-                <a href="projects/smartwatch.html" >
-                  <img src="images/smart-watch.jpeg" alt="Smartwatch">
-                </a>
-                <h2 class="fade-in">NFT Research Paper</h2>
-                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7048220691581599744/" >
-                  <img src="images/smart-contract.jpeg" alt="NFT">
-                </a>
               </div>
-            </div>
-        </div>
-
-
-
-        <div class="scroll-section" id="quote">
-          <img src="images/visionary.jpg" alt="Background Image 1" class="bg-img1">
-          <img src="images/seeker.jpg" alt="Background Image 1" class="bg-img2">
-          <img src="images/book.jpg" alt="Background Image 1" class="bg-img3">
-          <div class="quote-wrapper">
-          <div class="header-pair fade-in" id="first-pair">
-            <h2>innovative</h2><h1>Visionary</h1>
-          </div>
-          <div class="header-pair fade-in" id="second-pair">
-            <h1>Change</h1><h2>embracer</h2>
-          </div>
-          <div class="header-pair fade-in" id="third-pair">
-            <h2>knowledge</h2><h1>Seeker</h1>
-          </div>
-        </div>
-        </div>
-
-
-
-
-
-      
-
-        
-        <div class="scroll-section" id="footer">
-          <div class="footer-container">
-            <div class="footer-content fade-in">
-              <h2 class="fade-in">Let's </h2>
-              <h2 class="fade-in" id="secword">Get</h2>
-              <h2 class="fade-in" id="thirdword">Coffee</h2>
-            </div>
-            <div class="card-container">
-              <div class="card fade-in">
-                <div class="links">
-                  <a href="https://www.linkedin.com/in/cynthiawai/">
-                    <img src="images/linkedin.png" alt="LinkedIn">
-                  </a>
-                  <a href="mailto:cyncdyy@gmail.com">
-                    <img src="images/email-icon.png" alt="Email">
-                  </a>
-                </div>
-                <img src="images/another-business-card.png">
+              <div class="project-body-visual">
+                <div class="project-visual-label">Market Entry</div>
               </div>
             </div>
           </div>
-          <div class="footer-container-mobile">
-            <h2 class="fade-in">Let's Get Coffee</h2>
-            <p>
-              <a href="https://www.linkedin.com/in/cynthiawai/" target="_blank">LinkedIn</a> |
-              <a href="https://github.com/cyncdyy" target="_blank">Github</a> |
-              <a href="https://www.instagram.com/cyncdyy/" target="_blank">Instagram</a>
-          </p>
-            </div>
-          </div>
         </div>
 
-
+    <!-- Project 3 -->
+    <div class="project-accordion" id="proj-3">
+      <div class="project-header" onclick="toggleProject('proj-3')">
+        <div class="project-header-left">
+          <span class="project-header-num">03</span>
+          <span class="project-header-title">Airline Tweet Sentiment Analysis</span>
+        </div>
+        <div class="project-header-tags">
+          <span class="project-tag">Data Mining</span>
+          <span class="project-tag">NLP</span>
+          <span class="project-tag">Python</span>
+        </div>
+        <div class="project-toggle-icon">+</div>
       </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="project-body-content">
+            <p class="project-body-desc">Applied NLP and machine learning techniques to classify airline customer sentiment from Twitter data — surfacing actionable insights for service improvement and brand monitoring at scale.</p>
+            <div class="project-body-meta">
+              <div class="project-meta-row">
+                <span class="project-meta-label">Type</span>
+                <span class="project-meta-value">Academic Research Project</span>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Tools</span>
+                <span class="project-meta-value">Python, NLTK, Scikit-learn</span>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Output</span>
+                <span class="project-meta-value">Research Report</span>
+              </div>
+            </div>
+            <a href="https://itzcynthia.com/doc/IE500_Data_mining.pdf" class="project-link" target="_blank">View Report →</a>
+          </div>
+          <div class="project-body-visual">
+            <div class="project-visual-label">NLP</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                
+    <!-- Project 4 -->
+    <div class="project-accordion" id="proj-4">
+      <div class="project-header" onclick="toggleProject('proj-4')">
+        <div class="project-header-left">
+          <span class="project-header-num">04</span>
+          <span class="project-header-title">Search Engine Project</span>
+        </div>
+        <div class="project-header-tags">
+          <span class="project-tag">Engineering</span>
+          <span class="project-tag">Algorithms</span>
+        </div>
+        <div class="project-toggle-icon">+</div>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="project-body-content">
+            <p class="project-body-desc">Built a functional search engine from the ground up — covering indexing, ranking algorithms, and query processing with a live dashboard for real-time result visualization.</p>
+            <div class="project-body-meta">
+              <div class="project-meta-row">
+                <span class="project-meta-label">Type</span>
+                <span class="project-meta-value">Systems Engineering</span>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Tools</span>
+                <span class="project-meta-value">Python, Web Crawling, IR</span>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Output</span>
+                <span class="project-meta-value">Live Demo</span>
+              </div>
+            </div>
+            <a href="https://youtu.be/Hqz17dhkRJs" class="project-link" target="_blank">Watch Demo →</a>
+          </div>
+          <div class="project-body-visual">
+            <div class="project-visual-label">SRC</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-       
+    <!-- Project 5 -->
+    <div class="project-accordion" id="proj-5">
+      <div class="project-header" onclick="toggleProject('proj-5')">
+        <div class="project-header-left">
+          <span class="project-header-num">05</span>
+          <span class="project-header-title">Flight Attendant Smart Watch</span>
+        </div>
+        <div class="project-header-tags">
+          <span class="project-tag">UX Design</span>
+          <span class="project-tag">IoT</span>
+        </div>
+        <div class="project-toggle-icon">+</div>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="project-body-content">
+            <p class="project-body-desc">Designed a wearable UX solution for cabin crew — improving in-flight service coordination through thoughtful interface design and IoT integration concepts.</p>
+            <div class="project-body-meta">
+              <div class="project-meta-row">
+                <span class="project-meta-label">Type</span>
+                <span class="project-meta-value">UX / Product Design</span>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Tools</span>
+                <span class="project-meta-value">Figma, Prototyping, Research</span>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Output</span>
+                <span class="project-meta-value">Interactive Prototype</span>
+              </div>
+            </div>
+            <a href="https://itzcynthia.com/projects/smartwatch.html" class="project-link" target="_blank">View Project →</a>
+          </div>
+          <div class="project-body-visual">
+            <div class="project-visual-label">UX</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
- 
-    </body>
-    
+    <!-- Project 6 -->
+    <div class="project-accordion" id="proj-6">
+      <div class="project-header" onclick="toggleProject('proj-6')">
+        <div class="project-header-left">
+          <span class="project-header-num">06</span>
+          <span class="project-header-title">NFT Smart Contract Research</span>
+        </div>
+        <div class="project-header-tags">
+          <span class="project-tag">Web3</span>
+          <span class="project-tag">Research</span>
+          <span class="project-tag">Blockchain</span>
+        </div>
+        <div class="project-toggle-icon">+</div>
+      </div>
+      <div class="project-body">
+        <div class="project-body-inner">
+          <div class="project-body-content">
+            <p class="project-body-desc">In-depth research paper on NFT smart contract mechanisms, market dynamics, and the evolving legal and economic landscape of digital ownership in the Web3 ecosystem.</p>
+            <div class="project-body-meta">
+              <div class="project-meta-row">
+                <span class="project-meta-label">Type</span>
+                <span class="project-meta-value">Research Paper</span>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Topics</span>
+                <span class="project-meta-value">Solidity, DeFi, Smart Contracts</span>
+              </div>
+              <div class="project-meta-row">
+                <span class="project-meta-label">Output</span>
+                <span class="project-meta-value">Published on LinkedIn</span>
+              </div>
+            </div>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7048220691581599744/" class="project-link" target="_blank">View on LinkedIn →</a>
+          </div>
+          <div class="project-body-visual">
+            <div class="project-visual-label">NFT</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    
+  </div>
+</section>
 
+<div class="divider"></div>
 
-      <script src="script.js"></script>
+<!-- ── CONSULTING ── -->
+<section id="consulting" class="consulting">
+  <div class="section-header">
+    <span class="section-label">// 05 — What I Offer</span>
+    <h2 class="section-title">Where I can<br><em>add value.</em></h2>
+  </div>
+  <div class="consulting-grid">
+    <div class="consulting-item">
+      <div class="consulting-num">01 /</div>
+      <div class="consulting-title">Data Strategy & Analytics</div>
+      <div class="consulting-desc">Helping teams make sense of their data — pipeline design, visualization dashboards, and insight reporting.</div>
+    </div>
+    <div class="consulting-item">
+      <div class="consulting-num">02 /</div>
+      <div class="consulting-title">Digital Transformation</div>
+      <div class="consulting-desc">Scoping and delivering tech modernization — process automation, systems architecture, and change management.</div>
+    </div>
+    <div class="consulting-item">
+      <div class="consulting-num">03 /</div>
+      <div class="consulting-title">Product & UX Consulting</div>
+      <div class="consulting-desc">Translating business needs into user-centric digital products with research, wireframing, and iterative design.</div>
+    </div>
+    <div class="consulting-item">
+      <div class="consulting-num">04 /</div>
+      <div class="consulting-title">Web3 & Blockchain Advisory</div>
+      <div class="consulting-desc">Research-backed guidance on NFTs, DeFi, and smart contracts for organizations exploring crypto-native models.</div>
+    </div>
+    <div class="consulting-item">
+      <div class="consulting-num">05 /</div>
+      <div class="consulting-title">Project Management</div>
+      <div class="consulting-desc">End-to-end delivery ownership — stakeholder alignment, sprint planning, risk management, and reporting.</div>
+    </div>
+    <div class="consulting-item">
+      <div class="consulting-num">06 /</div>
+      <div class="consulting-title">Research & Competitive Intel</div>
+      <div class="consulting-desc">Structured market research, technology benchmarking, and strategic memos to support decision-making.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="contact-section">
+  <div class="contact-grid">
+    <div>
+      <h2 class="contact-title">Let's build<br>something<br><em>great.</em></h2>
+      <p class="contact-sub">Open to collaborations, consulting opportunities, and interesting conversations. Based in Hong Kong — always up for a coffee chat.</p>
+      <a href="mailto:cyncdyy@gmail.com" class="btn-primary">Send a Message</a>
+    </div>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/cynthiawai/" class="contact-link" target="_blank">
+        <div>
+          <div class="contact-link-name">LinkedIn</div>
+          <div class="contact-link-handle">/in/cynthiawai</div>
+        </div>
+        <div class="contact-link-arrow">→</div>
+      </a>
+      <a href="https://github.com/cyncdyy" class="contact-link" target="_blank">
+        <div>
+          <div class="contact-link-name">GitHub</div>
+          <div class="contact-link-handle">@cyncdyy</div>
+        </div>
+        <div class="contact-link-arrow">→</div>
+      </a>
+      <a href="https://www.instagram.com/cyncdyy/" class="contact-link" target="_blank">
+        <div>
+          <div class="contact-link-name">Instagram</div>
+          <div class="contact-link-handle">@cyncdyy</div>
+        </div>
+        <div class="contact-link-arrow">→</div>
+      </a>
+      <a href="mailto:cyncdyy@gmail.com" class="contact-link">
+        <div>
+          <div class="contact-link-name">Email</div>
+          <div class="contact-link-handle">cyncdyy@gmail.com</div>
+        </div>
+        <div class="contact-link-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div>© 2026 Cynthia Wai. All rights reserved.</div>
+  <div>Hong Kong — Making it Happen.</div>
+</footer>
+
+<script>
+  /* ── Hamburger menu ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ── Project accordion ── */
+  function toggleProject(id) {
+    const accordion = document.getElementById(id);
+    const isOpen = accordion.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.project-accordion').forEach(el => {
+      el.classList.remove('open');
+    });
+
+    // Open clicked if it was closed
+    if (!isOpen) {
+      accordion.classList.add('open');
+    }
+  }
+</script>
+
+</body>
 </html>
